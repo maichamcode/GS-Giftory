@@ -368,12 +368,12 @@ export function MemoryRainStep({
   };
 
   return (
-    <section className="relative min-h-svh overflow-hidden px-4 pb-8 pt-24 sm:px-8 sm:pt-28">
+    <section className="relative h-dvh min-h-dvh overflow-hidden px-4 pb-8 pt-24 sm:px-8 sm:pt-28">
       <ul className="sr-only">
         {config.wishes.map((wish) => <li key={wish}>{wish}</li>)}
       </ul>
       <div
-        className="memory-rain-viewport absolute inset-0 z-10 cursor-grab overflow-hidden active:cursor-grabbing"
+        className="memory-rain-viewport absolute inset-0 z-10 cursor-grab active:cursor-grabbing"
         onPointerDown={startDragging}
         onPointerMove={moveRain}
         onPointerUp={stopDragging}
@@ -396,7 +396,17 @@ export function MemoryRainStep({
               <div key={`${layout.x}-${index}`} className={cn("memory-rain-item", `memory-rain-${layout.size}`)} style={style}>
                 {index % 2 === 0 ? (
                   <div className="memory-rain-photo">
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-xl"><Image src={image.src} alt="" fill sizes="180px" className="object-cover" /></div>
+                    <div className="memory-rain-image-frame relative aspect-[4/3] overflow-hidden rounded-xl">
+                      <Image
+                        src={image.src}
+                        alt=""
+                        fill
+                        sizes="180px"
+                        quality={85}
+                        className="memory-rain-image object-cover"
+                        style={{ objectPosition: image.objectPosition }}
+                      />
+                    </div>
                     <Heart className="absolute -right-2 -top-2 size-7 fill-brand-soft text-brand" />
                   </div>
                 ) : (
