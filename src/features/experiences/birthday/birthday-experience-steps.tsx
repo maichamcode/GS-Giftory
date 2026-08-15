@@ -160,12 +160,14 @@ export function LetterStep({ config, onNext }: StepProps) {
                       {config.letterSignature.name}
                     </p>
                   </div>
-                  <div className="experience-reveal mt-6 border-t border-brand/15 pt-5 text-center">
-                    <Button onClick={onNext}><ArrowRight className="size-4" /></Button>
-                  </div>
                 </>
               ) : null}
             </div>
+            {letterComplete ? (
+              <div className="experience-reveal mt-6 border-t border-brand/15 pt-5 text-center">
+                <Button onClick={onNext}><ArrowRight className="size-4" /></Button>
+              </div>
+            ) : null}
           </article>
         )}
       </div>
@@ -313,7 +315,8 @@ function ScrapbookPolaroid({
             src={image.src}
             alt={image.alt}
             fill
-            priority={index < 2}
+            loading={index === 0 ? "eager" : "lazy"}
+            fetchPriority={index === 0 ? "high" : "auto"}
             sizes="(max-width: 640px) calc(100vw - 4rem), (max-width: 1024px) 44vw, 360px"
             className="object-cover"
             style={{ objectPosition: image.objectPosition }}

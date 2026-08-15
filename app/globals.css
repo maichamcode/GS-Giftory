@@ -472,7 +472,6 @@ a {
   transition:
     opacity .8s cubic-bezier(.22, 1, .36, 1),
     transform .8s cubic-bezier(.22, 1, .36, 1);
-  will-change: opacity, transform;
 }
 .scrapbook-polaroid-revealed { opacity: 1; transform: translateY(0) rotate(var(--polaroid-rotation)) scale(1); }
 .scrapbook-polaroid-2,

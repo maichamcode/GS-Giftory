@@ -1,7 +1,7 @@
 "use client";
 
 import { Music2, Volume2, VolumeX } from "lucide-react";
-import { useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import {
   AlbumStep,
   GreetingStep,
@@ -20,6 +20,7 @@ const TOTAL_STEPS = 5;
 
 export function BirthdayExperience({ template }: { template: GiftTemplate }) {
   const config = createBirthdayExperienceConfig(template);
+  const experienceRef = useRef<HTMLElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [step, setStep] = useState(1);
   const [musicPlaying, setMusicPlaying] = useState(false);
@@ -58,13 +59,15 @@ export function BirthdayExperience({ template }: { template: GiftTemplate }) {
   const goNext = () => setStep((current) => Math.min(current + 1, TOTAL_STEPS));
   const restart = () => setStep(1);
 
+  useLayoutEffect(() => {
+    experienceRef.current?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [step]);
+
   return (
     <main
+      ref={experienceRef}
       id="main-content"
-      className={cn(
-        "birthday-experience relative min-h-svh",
-        step === 4 ? "overflow-x-hidden" : "overflow-hidden",
-      )}
+      className="birthday-experience relative h-svh overflow-x-hidden overflow-y-auto overscroll-y-contain"
     >
       <BirthdayBackdrop />
       <audio
@@ -115,7 +118,13 @@ export function BirthdayExperience({ template }: { template: GiftTemplate }) {
         </p>
       ) : null}
 
-      <div key={step} className="experience-step-enter relative z-10 min-h-svh">
+      <div
+        key={step}
+        className={cn(
+          "relative z-10 min-h-svh",
+          step !== 4 && "experience-step-enter",
+        )}
+      >
         {step === 1 ? <StartStep onStart={startExperience} /> : null}
         {step === 2 ? <GreetingStep config={config} onNext={goNext} /> : null}
         {step === 3 ? <LetterStep config={config} onNext={goNext} /> : null}
