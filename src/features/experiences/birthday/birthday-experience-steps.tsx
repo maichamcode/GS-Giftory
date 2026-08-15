@@ -26,8 +26,9 @@ interface StepProps {
 
 export function StartStep({ onStart }: { onStart: () => void }) {
   return (
-    <section className="experience-screen px-5 pb-10 pt-28 text-center sm:px-8 sm:pt-32">
-      <div className="relative mx-auto flex w-full max-w-3xl flex-col items-center">
+    <section className="experience-screen relative isolate overflow-hidden px-5 pb-10 pt-28 text-center sm:px-8 sm:pt-32">
+      <BirthdayFireworks />
+      <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center">
         <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-[var(--birthday-ink)] sm:text-6xl">
           Một bất ngờ nhỏ<br />đang chờ được mở
         </h1>
@@ -52,6 +53,45 @@ export function StartStep({ onStart }: { onStart: () => void }) {
         </Button>
       </div>
     </section>
+  );
+}
+
+const fireworkBursts = [
+  { x: "9%", y: "22%", delay: "-.2s", scale: .86 },
+  { x: "88%", y: "18%", delay: "-.95s", scale: 1 },
+  { x: "18%", y: "58%", delay: "-1.7s", scale: .72 },
+  { x: "81%", y: "62%", delay: "-2.35s", scale: .8 },
+  { x: "50%", y: "12%", delay: "-3.05s", scale: .64 },
+] as const;
+
+const fireworkColors = ["#f45b8b", "#ffb84d", "#6dd6cb", "#8f7ae5", "#5da9ff"] as const;
+
+function BirthdayFireworks() {
+  return (
+    <div className="birthday-fireworks absolute inset-0 z-0" aria-hidden="true">
+      {fireworkBursts.map((burst, burstIndex) => {
+        const burstStyle = {
+          "--firework-x": burst.x,
+          "--firework-y": burst.y,
+          "--firework-delay": burst.delay,
+          "--firework-scale": burst.scale,
+        } as CSSProperties;
+
+        return (
+          <span key={`${burst.x}-${burst.y}`} className="birthday-firework" style={burstStyle}>
+            {Array.from({ length: 10 }, (_, sparkIndex) => {
+              const sparkStyle = {
+                "--spark-angle": `${sparkIndex * 36}deg`,
+                "--spark-color": fireworkColors[(sparkIndex + burstIndex) % fireworkColors.length],
+                "--spark-distance": `${-3.2 - (sparkIndex % 3) * .55}rem`,
+              } as CSSProperties;
+
+              return <i key={sparkIndex} className="birthday-firework-spark" style={sparkStyle} />;
+            })}
+          </span>
+        );
+      })}
+    </div>
   );
 }
 

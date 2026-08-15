@@ -295,6 +295,39 @@ a {
 .experience-delay-three { animation-delay: .85s; }
 .experience-delay-four { animation-delay: 1.15s; }
 
+.birthday-fireworks {
+  pointer-events: none;
+}
+.birthday-firework {
+  position: absolute;
+  left: var(--firework-x);
+  top: var(--firework-y);
+  width: .35rem;
+  height: .35rem;
+  transform: scale(var(--firework-scale));
+}
+.birthday-firework-spark {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transform: rotate(var(--spark-angle));
+}
+.birthday-firework-spark::before {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: .3rem;
+  height: 1rem;
+  content: "";
+  border-radius: 999px;
+  background: var(--spark-color);
+  box-shadow: 0 0 .55rem color-mix(in srgb, var(--spark-color) 68%, transparent);
+  opacity: 0;
+  transform: translate(-50%, 0) scaleY(.35);
+  transform-origin: center bottom;
+  animation: firework-burst 3.6s cubic-bezier(.2, .72, .25, 1) var(--firework-delay) infinite;
+}
+
 .birthday-cake-stage {
   position: relative;
   display: grid;
@@ -527,6 +560,21 @@ a {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
+@keyframes firework-burst {
+  0%, 8% {
+    opacity: 0;
+    transform: translate(-50%, 0) scaleY(.25);
+  }
+  11% { opacity: 1; }
+  31% {
+    opacity: .95;
+    transform: translate(-50%, var(--spark-distance)) scaleY(1);
+  }
+  46%, 100% {
+    opacity: 0;
+    transform: translate(-50%, calc(var(--spark-distance) - .8rem)) scaleY(.25);
+  }
+}
 @keyframes birthday-twinkle {
   0%, 100% { opacity: .3; transform: scale(.65); }
   50% { opacity: 1; transform: scale(1.15); }
@@ -615,6 +663,7 @@ a {
   .memory-rain-item:nth-child(n) { position: static; display: block; width: 100%; animation: none !important; }
   .birthday-bunting-flags,
   .birthday-bunting-flag { animation: none !important; }
+  .birthday-fireworks { display: none; }
   .scrapbook-polaroid {
     opacity: 1 !important;
     transform: rotate(var(--polaroid-rotation)) !important;
