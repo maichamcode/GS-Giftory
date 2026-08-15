@@ -400,15 +400,6 @@ a {
 }
 .typing-cursor { display: inline-block; width: 2px; height: 1.1em; margin-left: 3px; vertical-align: -.12em; background: var(--birthday-pink-strong); animation: cursor-blink .7s steps(1) infinite; }
 
-.birthday-scrapbook {
-  background:
-    radial-gradient(circle at 8% 16%, rgba(243, 174, 205, .25), transparent 16rem),
-    radial-gradient(circle at 94% 30%, rgba(232, 200, 244, .24), transparent 19rem),
-    radial-gradient(ellipse at 38% 64%, rgba(250, 191, 217, .13), transparent 24rem),
-    repeating-linear-gradient(0deg, rgba(152, 105, 126, .018) 0 1px, transparent 1px 5px),
-    #fffaf4;
-}
-
 .birthday-bunting { width: min(92vw, 48rem); }
 .birthday-bunting-row { position: relative; margin-inline: auto; height: clamp(4.4rem, 14vw, 7rem); }
 .birthday-bunting-happy { width: 65%; }
@@ -499,8 +490,9 @@ a {
 .memory-rain-viewport {
   height: 100dvh;
   user-select: none;
-  overflow: clip;
-  clip-path: inset(0);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 calc(100% - 9rem), transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0, #000 calc(100% - 9rem), transparent 100%);
 }
 .memory-rain-track { position: absolute; inset: 0; transition: transform .14s ease-out; }
 .memory-rain-item {
@@ -563,8 +555,16 @@ a {
   50% { transform: rotate(.35deg); }
 }
 @keyframes memory-fall {
-  from { transform: translate3d(0, 0, 0) rotate(var(--rain-rotation)); }
-  to { transform: translate3d(var(--rain-drift), calc(100dvh + 30rem), 0) rotate(var(--rain-rotation)); }
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate(var(--rain-rotation));
+  }
+  8%, 76% { opacity: 1; }
+  90% { opacity: 0; }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--rain-drift), calc(100dvh + 30rem), 0) rotate(var(--rain-rotation));
+  }
 }
 
 @media (min-width: 768px) {

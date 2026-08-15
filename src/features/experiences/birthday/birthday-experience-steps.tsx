@@ -175,7 +175,7 @@ export function LetterStep({ config, onNext }: StepProps) {
 
 export function AlbumStep({ config, onNext }: StepProps) {
   return (
-    <section className="birthday-scrapbook relative min-h-svh overflow-x-clip px-4 pb-20 pt-24 sm:px-8 sm:pb-24 sm:pt-28">
+    <section className="relative min-h-svh overflow-x-clip px-4 pb-20 pt-24 sm:px-8 sm:pb-24 sm:pt-28">
       <ScrapbookSideDecorations />
       <div className="relative z-10 mx-auto w-full max-w-6xl">
         <h1 className="sr-only">Happy Birthday — Album kỷ niệm của {config.recipientName}</h1>
