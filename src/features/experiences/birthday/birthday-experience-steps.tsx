@@ -99,17 +99,17 @@ export function GreetingStep({ config, onNext }: StepProps) {
   return (
     <section className="experience-screen px-5 pb-12 pt-28 text-center sm:px-8 sm:pt-32">
       <div className="mx-auto flex w-full max-w-3xl flex-col items-center">
-        <CakeSlice className="experience-reveal size-11 text-brand sm:size-14" aria-hidden="true" />
-        <p className="experience-reveal experience-delay-one mt-7 font-display text-3xl font-semibold text-[var(--birthday-ink)] sm:text-5xl">
+        <CakeSlice className="birthday-greeting-reveal size-11 text-brand sm:size-14" aria-hidden="true" />
+        <p className="birthday-greeting-reveal birthday-greeting-delay-one mt-7 font-display text-3xl font-semibold text-[var(--birthday-ink)] sm:text-5xl">
           Chúc mừng sinh nhật
         </p>
-        <h1 className="experience-reveal experience-delay-two mt-5 text-balance font-display text-5xl font-semibold leading-none tracking-[-0.04em] text-brand sm:text-7xl lg:text-8xl">
+        <h1 className="birthday-greeting-reveal birthday-greeting-delay-two mt-5 text-balance font-display text-5xl font-semibold leading-none tracking-[-0.04em] text-brand sm:text-7xl lg:text-8xl">
           {config.recipientName}
         </h1>
-        <p className="experience-reveal experience-delay-three mt-6 font-display text-3xl italic text-[var(--birthday-purple)] sm:text-5xl">
+        <p className="birthday-greeting-reveal birthday-greeting-delay-three mt-6 font-display text-3xl italic text-[var(--birthday-purple)] sm:text-5xl">
           Happy Birthday
         </p>
-        <div className="experience-reveal experience-delay-four mt-10">
+        <div className="birthday-greeting-reveal birthday-greeting-delay-four mt-10">
           <Button size="lg" onClick={onNext}>
             <Heart className="size-5 fill-current" aria-hidden="true" /> Mở món quà tiếp theo
           </Button>

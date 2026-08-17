@@ -122,7 +122,7 @@ export function BirthdayExperience({ template }: { template: GiftTemplate }) {
         key={step}
         className={cn(
           "relative z-10 min-h-svh",
-          step !== 4 && "experience-step-enter",
+          step !== 2 && step !== 4 && "experience-step-enter",
         )}
       >
         {step === 1 ? <StartStep onStart={startExperience} /> : null}
